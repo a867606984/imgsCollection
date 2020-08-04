@@ -12,17 +12,17 @@ const routers = require('./route/index');
 
 //session存储配置
 const sessionMysqlConfig = {
-    user:config.username,
-    password:config.password,
-    database:config.database,
-    host:config.database,
+    user: config.user,
+    password: config.password,
+    database: config.database,
+    host: config.database,
 }
 
 //配置session中间件
-app.use(session({
-    key:'USER_ID',
-    store:new MysqlStore(sessionMysqlConfig)
-}))
+// app.use(session({
+//     key: 'USER_ID',
+//     store: new MysqlStore(sessionMysqlConfig)
+// }))
 
 //加载post解析
 app.use(bodyparser());
@@ -38,6 +38,6 @@ app.use(views(path.join(__dirname, './views'), {
 
 
 //加载路由
-app.use(routers.routes(),routers.allowedMethods());
+app.use(routers.routes(), routers.allowedMethods());
 
 app.listen(config.port);
