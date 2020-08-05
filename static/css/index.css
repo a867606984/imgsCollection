@@ -18,8 +18,49 @@ body,html{
     background: #fff;
     z-index: 99;
 }
+
+.header .headr-container{
+    display: flex;
+    margin:0 auto;
+    width:90%;
+    height: 60px;
+}
+
+.header .logo{
+    width:25%;
+}
+
+.header .search{
+    display: flex;
+    width:50%;
+}
+
+.header .f_input{
+    width:80%;
+}
+
+.header .fn{
+    width:25%;
+}
+
 .container{
     margin-top:80px;
     width:1200px;
     background: #fff;
+}
+
+.container ul{
+    
+}
+.container ul li{
+    display: inline-block;
+    margin: 0 10px 10px 10px;
+    width:200px;
+    vertical-align: text-top;
+    
+}
+
+.container ul li img{
+    display: block;
+    width:200px;
 }

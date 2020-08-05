@@ -5,3 +5,24 @@
 *{padding:0;margin:0;box-sizing: border-box;}
 
 ul,ol,li{list-style: none;}
+
+.vhcenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.vhbetween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hbetween {
+  display: flex;
+  justify-content: space-between;
+}
+
+.vcenter {
+  display: flex;
+  align-items: center;
+}
