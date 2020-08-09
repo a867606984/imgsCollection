@@ -1,49 +1,79 @@
-const _post = function (option) {
-    axios({
-        method: option.method,
-        url: option.url,
-        data: option.method === 'POST' || option.method === 'PUT' ? option.params : null,
-        params: option.method === 'GET' || option.method === 'DELETE' ? option.params : null,
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+
+
+
+
+new Vue({
+    el: '#app',
+    data: {
+        imgData: {
+            // pageSize: 1,
+            // pageNum: 10,
+            // totalSize: 0,
+            // imgList: []
         },
-        responseType: 'json',
-        baseURL: option.baseURL,
-    })
-        // axios.post(url,params)
-        .then(function (res) {
-            console.log(res);
-            return
-            if (res.data.code === '200') {
-                if (option.success) {
-                    option.success(res.data)
-                }
-            } else {
-                if (option.failure) {
-                    option.failure(res.data)
-                } else {
-                    console.log('error: ' + url + '--' + JSON.stringify(res.data))
-                }
-            }
-        })
-        .catch(function (err) {
-            if (err) {
-                if (option.failure) {
-                    let res = { msg: JSON.stringify(res) };
-                    failure(res)
-                }
-
-            }
-        })
-}
-
-_post({
-    baseURL: 'http://localhost:3000/',
-    url: 'home',
-    params: {
-
+        pageNum: 1,
+        pageSize: 10,
+        searchVal: "",
     },
-    method: 'GET',
-    success(res) { },
-    failure(err) { }
+    components: {
+        // 'el-pagination': '',
+    },
+    mounted() {
+        this.getData();
+    },
+    methods: {
+        getData() {
+            const _this = this;
+            _post({
+                baseURL: 'http://localhost:3000/',
+                url: 'home/findList',
+                params: {
+                    pageNum: this.pageNum,
+                    pageSize: this.pageSize,
+                    searchVal: this.searchVal
+                },
+                method: 'GET',
+                success: function (res) {
+                    res.data.data.forEach(item => {
+                        item.url = 'http://localhost:3000/' + item.url
+                    })
+
+                    _this.imgData = res.data;
+
+                },
+                failure: function (err) { }
+            })
+        },
+        collect(id) {
+            const _this = this;
+            _post({
+                baseURL: 'http://localhost:3000/',
+                url: 'home/updateCollection',
+                params: {
+                    id
+                },
+                method: 'GET',
+                success: function (res) {
+                    _this.imgData.data.forEach(item => {
+                        if (item.id === id) item.iscollect = item.iscollect == 0 ? 1 : 0;
+                    })
+
+                },
+                failure: function (err) { }
+            })
+        },
+        pageChange(pageNum) {
+            this.pageNum = pageNum;
+            this.getData();
+        },
+        toDetail(id) {
+            location.href = `../detail/detail.html?id=${id}`;
+        },
+        search() {
+            this.pageNum = 1;
+            this.pageSize = 10;
+            this.getData();
+        }
+    }
+
 })

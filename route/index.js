@@ -9,7 +9,7 @@ const my = require('./my');
 const upload = require('./upload');
 
 
-router.use("/home", home.routes(), home.allowedMethods());
+router.use("/home", home.routes()).use(home.allowedMethods());
 router.use("/login", login.routes(), login.allowedMethods());
 router.use("/detail", detail.routes(), detail.allowedMethods());
 router.use("/my", my.routes(), my.allowedMethods());

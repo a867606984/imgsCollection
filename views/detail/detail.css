@@ -61,19 +61,6 @@ body,html{
     cursor: pointer;
 }
 
-.container ul li:hover{
-    animation: lihover .5s ease forwards ;
-}
-
-@keyframes  lihover{
-    from {
-        transform: scale(1);
-    }
-    to{
-        transform: scale(1.03);
-    }
-}
-
 .container ul li img{
     display: block;
     width:200px;

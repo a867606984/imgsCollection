@@ -49,6 +49,6 @@ app.use(views(path.join(__dirname, './views'), {
 
 
 //加载路由
-app.use(routers.routes(), routers.allowedMethods());
+app.use(routers.routes()).use(routers.allowedMethods());
 
 app.listen(config.port);
