@@ -7,8 +7,10 @@ const views = require('koa-views');
 const path = require('path');
 const session = require('koa-session-minimal');
 const MysqlStore = require('koa-mysql-session');
+const error = require("koa-json-error");
 const Router = require('koa-router');
 const routers = require('./route/index');
+
 
 //session存储配置
 const sessionMysqlConfig = {
@@ -26,6 +28,15 @@ const sessionMysqlConfig = {
 
 //加载post解析
 app.use(bodyparser());
+
+//接口错误提示
+app.use(
+    error({
+        postFormat: (e, { stack, ...rest }) =>
+            process.env.NODE_ENV === "development" ? rest : { stack, ...rest }
+    })
+);
+
 
 //加载静态资源
 app.use(static(path.join(__dirname, './static')));
