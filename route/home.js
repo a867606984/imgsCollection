@@ -3,5 +3,5 @@ const home = require('../controllers/home')
 
 
 module.exports = router.get('/findList', home.findList)
-    .get('/updateCollection', home.updateCollection)
+    .post('/updateCollection', home.updateCollection)
 
