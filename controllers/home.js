@@ -51,8 +51,8 @@ class home {
 
     async updateCollection(env) {
 
-        let { id } = env.query;
-
+        let { id } = env.request.body;
+        
         let iscollectList = await query(`SELECT iscollect FROM img_table WHERE id=${id}`);
         let iscollect = iscollectList[0].iscollect == 0 ? 1 : 0;
 
