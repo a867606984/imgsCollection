@@ -1,31 +1,23 @@
-const mysql = require('mysql');
+const query = require('./util-db');
 
-module.exports = async (env) => {
-    let html = `
-            <div>holle world</div>
-        `;
+class detail {
+    constructor() { }
+    async findInfoByid(env) {
+        let { id } = env.query;
 
-    const pool = mysql.createPool({
-        host: 'localhost',
-        user: 'root',
-        password: '123456',
-        database: 'imgsCollection'
-    })
-    
-    pool.getConnection((error, connection) => {
-    
-        connection.query('SELECT * FROM img_table', (err, res) => {
-    
-            // 在数据池中进行会话操作
-            connection.release();
-    
-            if (err) throw err;
-        })
-    
-    })
+        let result = await query(`SELECT * FROM img_table WHERE id=${id}`);
 
-    await env.render('index', {
-        title: '这是详情页'
-    })
+        env.body = {
+            code: 200,
+            data: { ...result[0], username: "ping", headimg: "https://www.baidu.com/img/flexible/logo/pc/result.png" },
+            msg: ''
+        };
+    }
+    async addComment(env) {
 
+
+
+    }
 }
+
+module.exports = new detail()

@@ -6,6 +6,14 @@
 
 ul,ol,li{list-style: none;}
 
+.flex{
+  display: flex;
+}
+
+.flex-1{
+  flex:1;
+}
+
 .vhcenter {
   display: flex;
   justify-content: center;

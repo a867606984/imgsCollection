@@ -23,8 +23,7 @@
             <div class="headr-container">
                 <div class="logo"></div>
                 <div class="search">
-                    <input class="f_input" type="text">
-                    <button class="search-btn">搜索</button>
+
                 </div>
                 <div class="fn">
                     <div class="upload"></div>
@@ -37,10 +36,56 @@
             </div>
         </div>
         <div class="container">
-
+            <div class="img-container">
+                <div class="img">
+                    <img src="https://www.baidu.com/img/PCfb_5bf082d29588c07f842ccde3f97243ea.png" alt="">
+                </div>
+                <div class="collect">
+                    <div :class="{
+                     'collect-icon':true,
+                    'el-icon-star-on': iscollect,
+                    'el-icon-star-off': !iscollect}">
+                    </div>
+                </div>
+            </div>
+            <div class="detail-container">
+                <div class="title">测试测试测试</div>
+                <div class="detail">测试测试测试测试测试测试测试测试测试测试测试测试</div>
+            </div>
+            <div class="comment-container ">
+                <div class="flex">
+                    <div class="head">
+                        <img src="https://www.baidu.com/img/PCfb_5bf082d29588c07f842ccde3f97243ea.png" alt="">
+                    </div>
+                    <div class="content flex-1">
+                        <el-input type="textarea"></el-input>
+                        <el-button type="primary">添加评论</el-button>
+                    </div>
+                </div>
+                <div class="comment-list">
+                    <ul>
+                        <li class="flex">
+                            <div class="head-img">
+                                <img src="https://www.baidu.com/img/PCfb_5bf082d29588c07f842ccde3f97243ea.png" alt="">
+                            </div>
+                            <div class="detail-content flex-1">
+                                测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="head-img">
+                                <img src="https://www.baidu.com/img/PCfb_5bf082d29588c07f842ccde3f97243ea.png" alt="">
+                            </div>
+                            <div class="detail-content flex-1">
+                                测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
-    <script src="./detail.js "></script>
+    <script src=" ./detail.js "></script>
 </body>
 
 
