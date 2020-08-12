@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 10/08/2020 21:14:35
+ Date: 12/08/2020 22:50:11
 */
 
 SET NAMES utf8mb4;
@@ -24,13 +24,19 @@ DROP TABLE IF EXISTS `comment_table`;
 CREATE TABLE `comment_table`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `userid` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of comment_table
 -- ----------------------------
-INSERT INTO `comment_table` VALUES (1, 'xxxxxxxx');
+INSERT INTO `comment_table` VALUES (1, 'xxxxxxxx', 1);
+INSERT INTO `comment_table` VALUES (2, 'sewfwwfefwef', 1);
+INSERT INTO `comment_table` VALUES (3, '你好呀，hahahahahh ', 1);
+INSERT INTO `comment_table` VALUES (4, '你好呀，阿萨斯', 1);
+INSERT INTO `comment_table` VALUES (5, '哈哈哈每晚is股', 1);
+INSERT INTO `comment_table` VALUES (6, '你好呀，大傻叉', 1);
 
 -- ----------------------------
 -- Table structure for img_table

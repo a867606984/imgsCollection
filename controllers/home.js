@@ -52,19 +52,20 @@ class home {
     async updateCollection(env) {
 
         let { id } = env.request.body;
-        
+
         let iscollectList = await query(`SELECT iscollect FROM img_table WHERE id=${id}`);
         let iscollect = iscollectList[0].iscollect == 0 ? 1 : 0;
 
-        await query(`UPDATE img_table SET iscollect=${iscollect} WHERE id=${id}`).then(() => {
-            env.set("Access-Control-Allow-Origin", "*");
 
-            env.body = {
-                code: 200,
-                data: "",
-                msg: ''
-            };
-        });
+        await query(`UPDATE img_table SET iscollect=${iscollect} WHERE id=${id}`)
+
+        env.set("Access-Control-Allow-Origin", "*");
+
+        env.body = {
+            code: 200,
+            data: "",
+            msg: ''
+        };
 
 
     }

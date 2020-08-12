@@ -1,8 +1,20 @@
 var _post = function (option) {
+
+    var stringify = function (obj = {}) {
+        if (Object.keys(obj).length === 0) return '';
+
+        var result = '';
+
+        for (var i in obj) {
+            result += i + '=' + obj[i] + '&';
+        }
+        return result.slice(0, -1);
+    }
+
     axios({
         method: option.method,
         url: option.url,
-        data: option.method === 'POST' || option.method === 'PUT' ? option.params : null,
+        data: option.method === 'POST' || option.method === 'PUT' ? stringify(option.params) : null,
         params: option.method === 'GET' || option.method === 'DELETE' ? option.params : null,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',

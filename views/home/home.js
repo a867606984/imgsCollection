@@ -52,7 +52,7 @@ new Vue({
                 params: {
                     id
                 },
-                method: 'GET',
+                method: 'POST',
                 success: function (res) {
                     _this.imgData.data.forEach(item => {
                         if (item.id === id) item.iscollect = item.iscollect == 0 ? 1 : 0;
