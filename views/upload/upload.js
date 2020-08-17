@@ -5,15 +5,10 @@
 new Vue({
     el: '#app',
     data: {
-        imgData: {
-            // pageSize: 1,
-            // pageNum: 10,
-            // totalSize: 0,
-            // imgList: []
-        },
-        pageNum: 1,
-        pageSize: 10,
-        searchVal: "",
+
+        baseData:{},
+        uploadImgUrl:{},
+        btnDisabled:false
     },
     components: {
         // 'el-pagination': '',
@@ -45,36 +40,59 @@ new Vue({
                 failure: function (err) { }
             })
         },
-        collect(id) {
+
+      
+        uploadImg(params){
             const _this = this;
+            
+            const formdata = new FormData();
+            const file = params.file;
+            formdata.append("file", file);
+
+            axios.post("http://localhost:3000/upload/uploadImg",formdata,{headers: {
+                //头部信息
+                "Content-Type": "multipart/form-data"
+              }}).then(res=>{
+                _this.uploadImgUrl = res.data.data.uploadUrl;
+                console.log(_this.uploadImgUrl)
+              })
+        },
+        save(){
+            const _this = this;
+
+            let {baseData,uploadImgUrl} = this;
+            
+            if(!baseData.title || !baseData.detail || !uploadImgUrl){
+                _this.$message({message:"有错",type:'error'})
+               return
+
+            }
+            
             _post({
                 baseURL: 'http://localhost:3000/',
-                url: 'home/updateCollection',
+                url: 'upload/saveImg',
                 params: {
-                    id
+                    ...this.baseData,
+                    url: this.uploadImgUrl
                 },
                 method: 'POST',
                 success: function (res) {
-                    _this.imgData.data.forEach(item => {
-                        if (item.id === id) item.iscollect = item.iscollect == 0 ? 1 : 0;
-                    })
+                    if(res.code === 200) {
+                        _this.$message({message:"保存成功",type:'success'});
+                        // location.href = "../home/home.html";
+                    }
 
                 },
                 failure: function (err) { }
             })
         },
-        pageChange(pageNum) {
-            this.pageNum = pageNum;
-            this.getData();
+        handleSuccess(response, file, fileList){
+            
         },
-        toDetail(id) {
-            location.href = `../detail/detail.html?id=${id}`;
+        handlePreview(e){},
+        handleRemove(e){
+            console.log(e)
         },
-        search() {
-            this.pageNum = 1;
-            this.pageSize = 10;
-            this.getData();
-        }
     }
 
 })

@@ -46,4 +46,6 @@ var _post = function (option) {
 
             }
         })
+
+    return axios;
 }
