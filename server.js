@@ -13,17 +13,32 @@ const routers = require('./route/index');
 
 //session存储配置
 const sessionMysqlConfig = {
-    user: config.user,
-    password: config.password,
-    database: config.database,
-    host: config.database,
+    user: config.database.user,
+    password: config.database.password,
+    database: config.database.database,
+    host: config.database.host,
 }
 
+// 存放sessionId的cookie配置
+let cookie = {
+    domain: 'localhost',  // 写cookie所在的域名
+    path: '/index',       // 写cookie所在的路径
+    maxAge: 10 * 60 * 1000, // cookie有效时长
+    expires: new Date('2017-02-15'),  // cookie失效时间
+    httpOnly: false,  // 是否只用于http请求中获取
+    overwrite: false, // 是否允许重写
+    secure: '',
+    sameSite: '',
+    signed: '',
+
+}
+
+
 //配置session中间件
-// app.use(session({
-//     key: 'USER_ID',
-//     store: new MysqlStore(sessionMysqlConfig)
-// }))
+app.use(session({
+    key: 'USER_ID',
+    store: new MysqlStore(sessionMysqlConfig),
+}))
 
 //接口错误提示
 app.use(
@@ -46,25 +61,25 @@ app.use(views(path.join(__dirname, './views'), {
 app.use(koaBody({
     multipart: true,
     formidable: {
-      // 上传存放的路径
-      uploadDir: path.join(__dirname, "static/upload"),
-      // 保持后缀不变
-      keepExtensions: true,
-      // 文件大小
-      maxFileSize: 1024*10,
-      onFileBegin: (name, file) => {
-        // 取后缀  如：.js  .txt
-        const reg = /\.[A-Za-z]+$/g
-        const ext = file.name.match(reg)[0] 
-  
-        // 修改上传文件名
-        file.path = path.join(__dirname, "static/upload/") + Date.now() + ext
-      },
-      onError(err){
-        console.log(err)
-      }
+        // 上传存放的路径
+        uploadDir: path.join(__dirname, "static/upload"),
+        // 保持后缀不变
+        keepExtensions: true,
+        // 文件大小
+        maxFileSize: 1024 * 10,
+        onFileBegin: (name, file) => {
+            // 取后缀  如：.js  .txt
+            const reg = /\.[A-Za-z]+$/g
+            const ext = file.name.match(reg)[0]
+
+            // 修改上传文件名
+            file.path = path.join(__dirname, "static/upload/") + Date.now() + ext
+        },
+        onError(err) {
+            console.log(err)
+        }
     }
-  }))
+}))
 
 //加载路由
 app.use(routers.routes()).use(routers.allowedMethods());

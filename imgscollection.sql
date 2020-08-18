@@ -11,11 +11,22 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 12/08/2020 22:50:11
+ Date: 19/08/2020 00:17:48
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for _mysql_session_store
+-- ----------------------------
+DROP TABLE IF EXISTS `_mysql_session_store`;
+CREATE TABLE `_mysql_session_store`  (
+  `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `expires` bigint(20) NULL DEFAULT NULL,
+  `data` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for comment_table
