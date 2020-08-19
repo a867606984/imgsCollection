@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="./upload.css" rel='stylesheet' type='text/css' />
+    <link href="./login.css" rel='stylesheet' type='text/css' />
     <link href="../../static/css/common.css" rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="../../static/css/element-ui.css">
     <script src="../../static/js/vue.js"></script>
@@ -21,7 +21,7 @@
 
         <div class="header">
             <div class="headr-container">
-                <div class="logo"></div>
+                <div class="logo" onclick="location.href='../home/home.html'">首页</div>
                 <div class="search">
                 </div>
                 <div class="fn">
@@ -35,45 +35,25 @@
             </div>
         </div>
         <div class="container">
-            <br>
-            <br>
-            <br>
-            <br> 标题：
-            <el-input type="text" v-model="baseData.title" style="width:200px;"></el-input>
-            <br>
-            <br>
-            <br>
-            <br> 详情：
-            <el-input type="textarea" v-model="baseData.detail" style="width:200px;"></el-input>
+            用户名：<el-input v-model="userName" style="width:400px;"></el-input>
             <br>
             <br>
             <br>
             <br>
-            <el-upload 
-            class="upload-demo" 
-            action=""
-            :http-request="uploadImg" 
-            name="files"
-            :on-change="handleSuccess"
-            :on-preview="handlePreview" 
-            :on-remove="handleRemove"
-            :limit="1"
-            list-type="picture">
-                <el-button size="small" type="primary">点击上传</el-button>
-                <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-            </el-upload>
             <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <div class="save">
-            <el-button type="primary" @click="save">保存</el-button>
-        </div>
+            密码：&nbsp;&nbsp;&nbsp;&nbsp;<el-input v-model="password" style="width:400px;" type="password"></el-input>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="save">
+                <el-button type="primary" @click="save">保存</el-button>
+            </div>
         </div>
         
     </div>
-    <script src="./upload.js"></script>
+    <script src="./login.js"></script>
 </body>
 
 </html>
