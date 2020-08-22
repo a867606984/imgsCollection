@@ -7,12 +7,7 @@ class login{
 
         let { userName,password } = env.request.body;
 
-        console.log(env.session)
-        console.log(password)
-        console.log(userName)
-
         env.set("Access-Control-Allow-Origin", "*");
-        
 
         if(!userName || !password ){
             env.body = {
@@ -23,10 +18,10 @@ class login{
             return;
         }
 
-        let session = env.session
-            session.isLogin = true
-            session.userName = userName
-            session.userId = 1
+        let session = env.session;
+            session.isLogin = true;
+            session.userName = userName;
+            session.count =   0;
 
         // env.cookies.set(
         //     'session', 

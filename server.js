@@ -22,7 +22,7 @@ const sessionMysqlConfig = {
 // 存放sessionId的cookie配置
 let cookie = {
     domain: 'localhost',  // 写cookie所在的域名
-    path: '/index',       // 写cookie所在的路径
+    path: '/',       // 写cookie所在的路径
     maxAge: 10 * 60 * 1000, // cookie有效时长
     expires: new Date('2017-02-15'),  // cookie失效时间
     httpOnly: false,  // 是否只用于http请求中获取
@@ -38,6 +38,7 @@ let cookie = {
 app.use(session({
     key: 'USER_ID',
     store: new MysqlStore(sessionMysqlConfig),
+    cookie
 }))
 
 //接口错误提示
