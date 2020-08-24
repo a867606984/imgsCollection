@@ -36,8 +36,6 @@ class home {
         // })
 
         env.set("Access-Control-Allow-Origin", "*");
-        env.session.count++;
-        console.log('session+++++++++++++',env.session);
 
         env.body = {
             code: 200,

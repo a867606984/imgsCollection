@@ -1,23 +1,33 @@
 var _post = function (option) {
 
     var stringify = function (obj = {}) {
-        if (Object.keys(obj).length === 0) return '';
 
-        var result = '';
+        const isObject =(obj) => Object.prototype.toString.call(obj) === "[object Object]";
+        const isArray = (obj) => Object.prototype.toString.call(obj) === "[object Array]";
 
-        for (var i in obj) {
-            result += i + '=' + obj[i] + '&';
+        let newObj = null;
+        if(isObject(obj)) newObj = {};
+        if(isArray(obj)) newObj = [];
+
+        for(let i in obj){
+            if(isObject(obj[i]) || isArray(obj[i])) newObj[i] = obj[i];
+            else if(obj[i] === null) newObj[i] = "";
+            else newObj[i] = obj[i];
         }
-        return result.slice(0, -1);
+
+        return newObj
     }
+
 
     axios({
         method: option.method,
         url: option.url,
-        data: option.method === 'POST' || option.method === 'PUT' ? stringify(option.params) : null,
+        data: option.method === 'POST' || option.method === 'PUT' ? option.params : null,
         params: option.method === 'GET' || option.method === 'DELETE' ? option.params : null,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json;charset=UTF-8',
+            "cookies":localStorage.getItem("token"),
+            ...option.headers
         },
         responseType: 'json',
         baseURL: option.baseURL,

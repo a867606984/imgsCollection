@@ -1,13 +1,15 @@
 const query = require('./util-db');
+const jwt = require('jsonwebtoken');
 
 class login{
     constructor(){}
 
     async login(env){
 
+        
         let { userName,password } = env.request.body;
 
-        env.set("Access-Control-Allow-Origin", "*");
+        
 
         if(!userName || !password ){
             env.body = {
@@ -18,27 +20,26 @@ class login{
             return;
         }
 
-        let session = env.session;
-            session.isLogin = true;
-            session.userName = userName;
-            session.count =   0;
+        let result = await query(`SELECT * FROM user_table WHERE username='${userName}'`);
 
-        // env.cookies.set(
-        //     'session', 
-        //     'hello world',
-        //     {
-        //         domain: 'localhost',  // 写cookie所在的域名
-        //         path: '/',       // 写cookie所在的路径
-        //         maxAge: 10 * 60 * 1000, // cookie有效时长
-        //         expires: new Date('2017-02-15'),  // cookie失效时间
-        //         httpOnly: false,  // 是否只用于http请求中获取
-        //         overwrite: false  // 是否允许重写
-        //     }
-        // )
+        if(!result){
+            env.body = {
+                code: 500,
+                data: '',
+                msg: '密码错误或者该账号未注册'
+            };
+
+            return
+        }
+        
+        const token = jwt.sign({
+            username:result.username,
+            id:result.id
+        },'my_token',{expiresIn:'2h'})
 
         env.body = {
             code: 200,
-            data: session,
+            data: token,
             msg: ''
         };
     }

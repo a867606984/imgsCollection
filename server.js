@@ -1,6 +1,8 @@
 const config = require('./config');
 const Koa = require('koa');
 const app = new Koa();
+const cors = require('koa2-cors')
+const koajwt = require('koa-jwt');
 const static = require('koa-static');
 const views = require('koa-views');
 const path = require('path');
@@ -10,6 +12,26 @@ const koaBody = require('koa-body');
 const error = require("koa-json-error");
 const routers = require('./route/index');
 
+//跨域
+app.use(cors());
+
+
+// app.use((ctx, next) => {
+//     return next().catch((err) => {
+//         if(err.status === 401){
+//             ctx.status = 401;
+//       		ctx.body = 'Protected resource, use cookie header to get access\n';
+//         }else{
+//             throw err;
+//         }
+//     })
+// })
+
+// app.use(koajwt({
+// 	secret: 'my_token'
+// }).unless({
+// 	path: [/\/login\/login/]
+// }));
 
 //session存储配置
 const sessionMysqlConfig = {

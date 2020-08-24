@@ -1,5 +1,6 @@
 
 const query = require('./util-db');
+const jwt = require('jsonwebtoken');
 
 class uploadFn {
     constructor() { }
@@ -10,6 +11,29 @@ class uploadFn {
 
 
         env.set("Access-Control-Allow-Origin", "*");
+        if(!env.header || !env.header.cookies){
+            env.body = {
+                code: 500,
+                data:'',
+                msg: '未认证'
+            }
+
+            return;
+        }
+
+
+
+        jwt.verify(env.header.cookies,'my_token', (error, decoded) => {
+           if(!error){
+               console.log(decoded);
+           }else{
+            console.log(error)
+           }
+        });
+
+        console.log(env.state)
+
+        
         
         let {name,path} = env.request.files.file;
         

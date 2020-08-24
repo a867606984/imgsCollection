@@ -41,6 +41,7 @@ new Vue({
                 success: function (res) {
                     if(res.code === 200) {
                         _this.$message({message:"登录成功",type:'success'});
+                        localStorage.setItem("token",res.data);
                         // location.href = "../home/home.html";
                     }
 

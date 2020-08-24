@@ -51,7 +51,8 @@ new Vue({
 
             axios.post("http://localhost:3000/upload/uploadImg",formdata,{headers: {
                 //头部信息
-                "Content-Type": "multipart/form-data"
+                "Content-Type": "multipart/form-data",
+                "cookies":localStorage.getItem("token")
               }}).then(res=>{
                 _this.uploadImgUrl = res.data.data.uploadUrl;
                 console.log(_this.uploadImgUrl)
@@ -76,6 +77,9 @@ new Vue({
                     url: this.uploadImgUrl
                 },
                 method: 'POST',
+                headers:{
+                    
+                },
                 success: function (res) {
                     if(res.code === 200) {
                         _this.$message({message:"保存成功",type:'success'});
