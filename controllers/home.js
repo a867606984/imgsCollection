@@ -1,8 +1,12 @@
 const query = require('./util-db');
+const jwt = require('jsonwebtoken');
 
 class home {
     constructor() { }
     async findList(env) {
+
+        var decoded = jwt.verify(env.header.cookies, 'my_token');
+    console.log(decoded) // bar
 
         let { pageSize, pageNum, searchVal } = env.query;
 

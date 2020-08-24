@@ -23,15 +23,17 @@ class uploadFn {
 
 
 
-        jwt.verify(env.header.cookies,'my_token', (error, decoded) => {
-           if(!error){
-               console.log(decoded);
-           }else{
-            console.log(error)
-           }
-        });
+        // jwt.verify(env.header.cookies,'my_token', (error, decoded) => {
+        //    if(!error){
+        //        console.log(decoded);
+        //    }else{
+        //     console.log(error)
+        //    }
+        // });
 
-        console.log(env.state)
+        // let obj = jwt.decode(env.header.cookies);
+        // console.log(obj);
+
 
         
         

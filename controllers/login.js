@@ -20,9 +20,9 @@ class login{
             return;
         }
 
-        let result = await query(`SELECT * FROM user_table WHERE username='${userName}'`);
+        let result = await query(`SELECT * FROM user_table WHERE username=${userName}`);
 
-        if(!result){
+        if(Object.keys(result).length === 0){
             env.body = {
                 code: 500,
                 data: '',
@@ -33,8 +33,9 @@ class login{
         }
         
         const token = jwt.sign({
-            username:result.username,
-            id:result.id
+
+            name:'11111',
+            ...result
         },'my_token',{expiresIn:'2h'})
 
         env.body = {
