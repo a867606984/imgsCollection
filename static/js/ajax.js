@@ -26,7 +26,8 @@ var _post = function (option) {
         params: option.method === 'GET' || option.method === 'DELETE' ? option.params : null,
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',
-            "cookies":localStorage.getItem("token"),
+            // "authorization":"Bearer "+localStorage.getItem("token"),
+            // "cookies":,
             ...option.headers
         },
         responseType: 'json',

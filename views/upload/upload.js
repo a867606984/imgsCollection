@@ -8,7 +8,8 @@ new Vue({
 
         baseData:{},
         uploadImgUrl:{},
-        btnDisabled:false
+        btnDisabled:false,
+
     },
     components: {
         // 'el-pagination': '',
@@ -18,15 +19,17 @@ new Vue({
     },
     methods: {
         getData() {
-            return
             const _this = this;
             _post({
                 baseURL: 'http://localhost:3000/',
                 url: 'home/findList',
                 params: {
-                    pageNum: this.pageNum,
-                    pageSize: this.pageSize,
-                    searchVal: this.searchVal
+                    pageNum: 1,
+                    pageSize: 10,
+                    searchVal: ""
+                },
+                headers:{
+                    "authorization":localStorage.getItem("token")
                 },
                 method: 'GET',
                 success: function (res) {

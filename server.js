@@ -16,22 +16,7 @@ const routers = require('./route/index');
 app.use(cors());
 
 
-// app.use((ctx, next) => {
-//     return next().catch((err) => {
-//         if(err.status === 401){
-//             ctx.status = 401;
-//       		ctx.body = 'Protected resource, use cookie header to get access\n';
-//         }else{
-//             throw err;
-//         }
-//     })
-// })
 
-// app.use(koajwt({
-// 	secret: 'my_token'
-// }).unless({
-// 	path: [/\/login\/login/]
-// }));
 
 //session存储配置
 const sessionMysqlConfig = {
@@ -106,5 +91,27 @@ app.use(koaBody({
 
 //加载路由
 app.use(routers.routes()).use(routers.allowedMethods());
+
+
+
+//验证每个路由加上了token
+app.use((ctx, next) => {
+
+    return next().catch((err) => {
+        if(err.status === 401){
+            ctx.status = 401;
+      		ctx.body = 'Protected resource, use Authorization header to get access\n';
+        }else{
+            throw err;
+        }
+    })
+})
+
+app.use(koajwt({
+	secret: 'my_token'
+}).unless({
+	path: [/\/login\/login/]
+}));
+
 
 app.listen(config.port);

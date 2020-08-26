@@ -17,8 +17,10 @@ new Vue({
         // 'el-pagination': '',
     },
     mounted() {
+    
     },
     methods: {
+        
         save(){
             const _this = this;
 
