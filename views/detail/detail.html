@@ -43,8 +43,9 @@
                 <div class="collect" @click="collect">
                     <div :class="{
                      'collect-icon':true,
-                    'el-icon-star-on': iscollect,
-                    'el-icon-star-off': !iscollect}">
+                    'el-icon-star-on': iscollect && isAuth,
+                    'el-icon-star-off': !iscollect || !isAuth
+                    }">
                     </div>
                 </div>
             </div>
@@ -55,7 +56,8 @@
             <div class="comment-container ">
                 <div class="flex">
                     <div class="head">
-                        <img :src="headimg" alt="">
+                        <img v-if="isAuth" :src="headimg" alt="">
+                        <img v-else src="https://www.baidu.com/img/flexible/logo/pc/result.png" alt="">
                     </div>
                     <div class="content flex-1">
                         <el-input type="textarea" v-model="commentVal"></el-input>

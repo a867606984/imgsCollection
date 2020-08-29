@@ -1,6 +1,6 @@
 module.exports = {
     port: 3000,
-
+    tokenName: "my_token",
     database: {
         host: 'localhost',
         port: 3306,

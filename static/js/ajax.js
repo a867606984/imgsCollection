@@ -2,16 +2,16 @@ var _post = function (option) {
 
     var stringify = function (obj = {}) {
 
-        const isObject =(obj) => Object.prototype.toString.call(obj) === "[object Object]";
+        const isObject = (obj) => Object.prototype.toString.call(obj) === "[object Object]";
         const isArray = (obj) => Object.prototype.toString.call(obj) === "[object Array]";
 
         let newObj = null;
-        if(isObject(obj)) newObj = {};
-        if(isArray(obj)) newObj = [];
+        if (isObject(obj)) newObj = {};
+        if (isArray(obj)) newObj = [];
 
-        for(let i in obj){
-            if(isObject(obj[i]) || isArray(obj[i])) newObj[i] = obj[i];
-            else if(obj[i] === null) newObj[i] = "";
+        for (let i in obj) {
+            if (isObject(obj[i]) || isArray(obj[i])) newObj[i] = obj[i];
+            else if (obj[i] === null) newObj[i] = "";
             else newObj[i] = obj[i];
         }
 
@@ -26,7 +26,7 @@ var _post = function (option) {
         params: option.method === 'GET' || option.method === 'DELETE' ? option.params : null,
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',
-            // "authorization":"Bearer "+localStorage.getItem("token"),
+            "authorization": localStorage.getItem("token"),
             // "cookies":,
             ...option.headers
         },

@@ -16,6 +16,8 @@ new Vue({
         commentList: [],
 
         commentVal: "",
+
+        isAuth: false
     },
     components: {
         // 'el-pagination': '',
@@ -42,6 +44,7 @@ new Vue({
                     _this.title = data.title;
                     _this.detail = data.detail;
                     _this.headimg = data.headimg;
+                    _this.isAuth = data.isAuth
 
                 },
                 failure: function (err) { }
@@ -63,6 +66,11 @@ new Vue({
 
         },
         collect() {
+            if (!this.isAuth) {
+                this.$message({ message: "请先登录", type: 'error' });
+                return
+            }
+
             const _this = this;
             _post({
                 baseURL: 'http://localhost:3000/',
@@ -79,6 +87,11 @@ new Vue({
             })
         },
         addComment() {
+            if (!this.isAuth) {
+                this.$message({ message: "请先登录", type: 'error' });
+                return
+            }
+
             const _this = this;
             _post({
                 baseURL: 'http://localhost:3000/',

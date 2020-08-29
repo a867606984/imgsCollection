@@ -1,17 +1,16 @@
 const query = require('./util-db');
 const jwt = require('jsonwebtoken');
+const { tokenName } = require('../config/index');
 
-class login{
-    constructor(){}
+class login {
+    constructor() { }
 
-    async login(env){
+    async login(env) {
 
-        
-        let { userName,password } = env.request.body;
 
-        
+        let { userName, password } = env.request.body;
 
-        if(!userName || !password ){
+        if (!userName || !password) {
             env.body = {
                 code: 500,
                 data: "",
@@ -20,9 +19,9 @@ class login{
             return;
         }
 
-        let result = await query(`SELECT * FROM user_table WHERE username='${userName}'`);
+        let result = await query(`SELECT id,username,headimg FROM user_table WHERE username='${userName}'`);
 
-        if(Object.keys(result).length === 0){
+        if (Object.keys(result).length === 0) {
             env.body = {
                 code: 500,
                 data: '',
@@ -31,12 +30,10 @@ class login{
 
             return
         }
-        
-        const token = jwt.sign({
 
-            name:'11111',
-            ...result
-        },'my_token',{expiresIn:'2h'})
+        const token = jwt.sign({
+            ...result[0]
+        }, tokenName, { expiresIn: '2h' })
 
         env.body = {
             code: 200,

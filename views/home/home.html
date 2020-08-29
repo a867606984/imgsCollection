@@ -29,7 +29,7 @@
                 <div class="fn">
                     <a href="../upload/upload.html" class="upload">上传图片</a>
                     <div class="my"></div>
-                    <div class="login"   onclick="location.href='../login/login.html'">
+                    <div class="login" onclick="location.href='../login/login.html'">
 
                         登录
                     </div>
@@ -42,8 +42,8 @@
                     <div class="collect" @click.stop=collect(item.id)>
                         <div :class="{
                             'collect-icon':true,
-                            'el-icon-star-on': item.iscollect,
-                            'el-icon-star-off': !item.iscollect
+                            'el-icon-star-on': item.iscollect && imgData.isAuth,
+                            'el-icon-star-off': !item.iscollect || !imgData.isAuth
                         }"></div>
                     </div>
                     <img :src="item.url" alt="">

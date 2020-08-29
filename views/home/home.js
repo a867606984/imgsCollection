@@ -14,6 +14,7 @@ new Vue({
         pageNum: 1,
         pageSize: 10,
         searchVal: "",
+        isAuth: false,
     },
     components: {
         // 'el-pagination': '',
@@ -45,6 +46,12 @@ new Vue({
             })
         },
         collect(id) {
+
+            if (!this.imgData.isAuth) {
+                this.$message({ message: "请先登录", type: 'error' });
+                return
+            }
+
             const _this = this;
             _post({
                 baseURL: 'http://localhost:3000/',

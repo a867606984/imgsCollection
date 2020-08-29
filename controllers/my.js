@@ -1,3 +1,7 @@
+const query = require('./util-db');
+const jwt = require('jsonwebtoken');
+const verify = require('./util-jwt');
+
 module.exports = async (env) => {
 
     await env.render('index', {
@@ -5,5 +9,5 @@ module.exports = async (env) => {
     })
 
 }
-    
+
 

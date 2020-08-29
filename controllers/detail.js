@@ -1,8 +1,26 @@
 const query = require('./util-db');
+const verify = require('./util-jwt');
 
 class detail {
     constructor() { }
     async findInfoByid(env) {
+        let verifyResult = null;
+
+        let params = {
+            isAuth: false,
+            username: "",
+            headimg: ""
+        }
+
+        try {
+            let { username, headimg } = await verify(env.header.authorization);
+            params.isAuth = true;
+            params.username = username;
+            params.headimg = headimg;
+        } catch (error) {
+
+        }
+
         let { id } = env.query;
 
         let result = await query(`SELECT * FROM img_table WHERE id=${id}`);
@@ -11,7 +29,10 @@ class detail {
 
         env.body = {
             code: 200,
-            data: { ...result[0], username: "ping", headimg: "https://www.baidu.com/img/flexible/logo/pc/result.png" },
+            data: {
+                ...result[0],
+                ...params
+            },
             msg: ''
         };
     }
@@ -30,11 +51,11 @@ class detail {
     }
 
     async addComment(env) {
+        let { id } = await verify(env.header.authorization);
+
         let { commentVal } = env.request.body;
 
-        let userid = 1;
-
-        await query(`INSERT INTO comment_table (content,userid) VALUES ('${commentVal}','${userid}')`)
+        await query(`INSERT INTO comment_table (content,userid) VALUES ('${commentVal}','${id}')`)
 
         let result = await query(`SELECT * FROM comment_table`)
 
