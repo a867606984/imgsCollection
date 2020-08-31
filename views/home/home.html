@@ -39,7 +39,7 @@
         <div class="container">
             <ul>
                 <li v-for="item in imgData.data" :key="item.id" @click="toDetail(item.id)">
-                    <div class="collect" @click.stop=collect(item.id)>
+                    <div class="collect" @click.stop=collect(item.id,item.iscollect)>
                         <div :class="{
                             'collect-icon':true,
                             'el-icon-star-on': item.iscollect && imgData.isAuth,

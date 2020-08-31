@@ -45,7 +45,7 @@ new Vue({
                 failure: function (err) { }
             })
         },
-        collect(id) {
+        collect(id,iscollect) {
 
             if (!this.imgData.isAuth) {
                 this.$message({ message: "请先登录", type: 'error' });
@@ -57,7 +57,8 @@ new Vue({
                 baseURL: 'http://localhost:3000/',
                 url: 'home/updateCollection',
                 params: {
-                    id
+                    id,
+                    iscollect
                 },
                 method: 'POST',
                 success: function (res) {

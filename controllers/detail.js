@@ -13,10 +13,10 @@ class detail {
         }
 
         try {
-            let { username, headimg } = await verify(env.header.authorization);
+            verifyResult = await verify(env.header.authorization);
             params.isAuth = true;
-            params.username = username;
-            params.headimg = headimg;
+            params.username = verifyResult.username;
+            params.headimg = verifyResult.headimg;
         } catch (error) {
 
         }
@@ -25,13 +25,16 @@ class detail {
 
         let result = await query(`SELECT * FROM img_table WHERE id=${id}`);
 
-        env.set("Access-Control-Allow-Origin", "*");
+        let collecList = [];
+
+        if(verifyResult) collecList = await query(`SELECT * FROM img_user_table WHERE imgid=${id} AND userid=${verifyResult.id}`)
 
         env.body = {
             code: 200,
             data: {
                 ...result[0],
-                ...params
+                ...params,
+                iscollect: collecList.length === 0 ? 0 : 1
             },
             msg: ''
         };

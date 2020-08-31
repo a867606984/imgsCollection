@@ -76,7 +76,8 @@ new Vue({
                 baseURL: 'http://localhost:3000/',
                 url: 'home/updateCollection',
                 params: {
-                    id: this.id
+                    id: this.id,
+                    iscollect:this.iscollect
                 },
                 method: 'POST',
                 success: function (res) {
