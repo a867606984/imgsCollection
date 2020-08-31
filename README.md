@@ -1,2 +1,2 @@
 # imgsCollection
-类花瓣网 + koa2 + Jquery + Boostrap
+类花瓣网 + koa2 + VUE + element-ui
